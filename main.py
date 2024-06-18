@@ -1,7 +1,12 @@
 from openai import OpenAI
 import streamlit as st
 
-client = OpenAI(api_key='api_key')
+#client = OpenAI(api_key='api_key')
+
+headers = {
+    "authorization": st.secrets["api_key"],
+    "content-type": "application/json"
+}    
 
 st.title("💬 Chatbot")
 st.caption("🚀 A Streamlit chatbot powered by OpenAI")
@@ -16,7 +21,7 @@ if prompt := st.chat_input():
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
 
-    response = client.chat.completions.create(
+    response = headers.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a tutor assistant assisting students ages 8-10 on the spectrum of autism to practice their basic communication skills in English. Their native language is Greek and they learn English as a Foreign Language. Their English CEFR level is A1-A2. The subjects you will be discussing are the following: Colors, Food, Hobbies. Don't forget to ask questions back and keep the conversation flowing! You will present one subject at a time."},
