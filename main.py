@@ -1,12 +1,7 @@
 from openai import OpenAI
 import streamlit as st
 
-#client = OpenAI(api_key='api_key')
-
-headers = {
-    "authorization": st.secrets["api_key"],
-    "content-type": "application/json"
-}    
+client = OpenAI(api_key='apikey')
 
 st.title("💬 Chatbot")
 st.caption("🚀 A Streamlit chatbot powered by OpenAI")
